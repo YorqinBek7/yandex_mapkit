@@ -232,9 +232,13 @@ public class YandexMapController:
     return arguments
   }
 
-  private static func isM1Simulator() -> Bool {
-    return (TARGET_IPHONE_SIMULATOR & TARGET_CPU_ARM64) != 0
-  }
+private static func isM1Simulator() -> Bool {
+    #if targetEnvironment(simulator)
+    return true
+    #else
+    return false
+    #endif
+}
 
   private func hasLocationPermission() -> Bool {
     if CLLocationManager.locationServicesEnabled() {
